@@ -1,3 +1,5 @@
+Yes — exactly. The page will initially show a full-screen **“CLICK TO ENTER”** overlay. After the visitor taps it, the overlay disappears and `Tuff.mp3` starts playing. No mention of audio/music will appear on the page.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +29,49 @@
             flex-direction: column;
             align-items: center;
         }
+
+        /* CLICK TO ENTER */
+
+        #enter-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(circle, #2b0645 0%, #08000d 50%, #000000 100%);
+
+            cursor: pointer;
+
+            transition: opacity 0.7s ease;
+        }
+
+        #enter-text {
+            font-family: "Courier New", monospace;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 5px;
+
+            color: white;
+
+            text-shadow:
+                0 0 5px #ffffff,
+                0 0 15px #a020f0,
+                0 0 30px #8a2be2,
+                0 0 60px #8a2be2;
+
+            animation: enterGlow 1.5s infinite alternate;
+        }
+
+        #enter-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* MAIN PAGE */
 
         h1 {
             margin-top: 70px;
@@ -97,67 +142,6 @@
             transform: scale(0.97);
         }
 
-        /* MUSIC */
-
-        .music-player {
-            margin-top: 35px;
-            width: min(90%, 450px);
-
-            background: rgba(20, 0, 30, 0.8);
-            border: 2px solid #9b30ff;
-            border-radius: 14px;
-
-            padding: 18px;
-
-            box-shadow:
-                0 0 10px rgba(155, 48, 255, 0.4);
-        }
-
-        .music-title {
-            display: block;
-            margin-bottom: 12px;
-
-            font-size: 17px;
-            font-weight: bold;
-
-            text-shadow:
-                0 0 8px #9b30ff;
-        }
-
-        .music-button {
-            width: 100%;
-
-            background: #180022;
-            border: 2px solid #9b30ff;
-            border-radius: 12px;
-
-            color: white;
-
-            padding: 14px;
-
-            font-size: 16px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition:
-                background 0.25s ease,
-                box-shadow 0.25s ease,
-                transform 0.2s ease;
-        }
-
-        .music-button:hover {
-            background: #4b096b;
-
-            box-shadow:
-                0 0 10px #9b30ff,
-                0 0 25px #9b30ff;
-        }
-
-        .music-button:active {
-            transform: scale(0.97);
-        }
-
         footer {
             margin-top: auto;
             padding: 30px;
@@ -165,6 +149,8 @@
             color: #6f6178;
             font-size: 13px;
         }
+
+        /* ANIMATIONS */
 
         @keyframes glow {
             from {
@@ -183,10 +169,27 @@
             }
         }
 
+        @keyframes enterGlow {
+            from {
+                opacity: 0.65;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 32px;
                 margin-top: 50px;
+            }
+
+            #enter-text {
+                font-size: 21px;
+                letter-spacing: 3px;
             }
 
             .subtitle {
@@ -202,6 +205,22 @@
 </head>
 
 <body>
+
+    <!-- CLICK TO ENTER SCREEN -->
+
+    <div id="enter-screen">
+        <div id="enter-text">
+            CLICK TO ENTER
+        </div>
+    </div>
+
+    <!-- HIDDEN MUSIC -->
+
+    <audio id="tuffMusic" loop preload="auto">
+        <source src="Tuff.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- MAIN PAGE -->
 
     <h1>GUY777 MOD HUB</h1>
 
@@ -238,49 +257,27 @@
 
     </div>
 
-    <!-- TUFF MUSIC -->
-
-    <div class="music-player">
-
-        <span class="music-title">
-            🎵 Tuff
-        </span>
-
-        <button class="music-button" id="musicButton">
-            ▶ Play Tuff
-        </button>
-
-        <audio id="tuffMusic" loop preload="auto">
-            <source src="Tuff.mp3" type="audio/mpeg">
-        </audio>
-
-    </div>
-
     <footer>
         GUY777 MOD HUB © 2026
     </footer>
 
     <script>
+        const enterScreen = document.getElementById("enter-screen");
         const music = document.getElementById("tuffMusic");
-        const musicButton = document.getElementById("musicButton");
 
-        musicButton.addEventListener("click", async () => {
+        enterScreen.addEventListener("click", async () => {
             try {
-                if (music.paused) {
-                    await music.play();
-                    musicButton.textContent = "⏸ Pause Tuff";
-                } else {
-                    music.pause();
-                    musicButton.textContent = "▶ Play Tuff";
-                }
-            } catch (error) {
-                console.error("Could not play music:", error);
-                musicButton.textContent = "⚠️ Could not play Tuff";
-            }
-        });
+                await music.play();
 
-        music.addEventListener("ended", () => {
-            musicButton.textContent = "▶ Play Tuff";
+                enterScreen.classList.add("hidden");
+
+                setTimeout(() => {
+                    enterScreen.remove();
+                }, 700);
+
+            } catch (error) {
+                console.error("Could not start:", error);
+            }
         });
     </script>
 

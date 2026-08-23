@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,35 +14,26 @@
         body {
             margin: 0;
             min-height: 100vh;
-
             background:
                 radial-gradient(circle at top, #2b0645 0%, #0b0012 35%, #000000 75%);
-
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
-
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* CLICK TO ENTER */
-
         #enter-screen {
             position: fixed;
             inset: 0;
             z-index: 9999;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             background:
                 radial-gradient(circle, #2b0645 0%, #08000d 50%, #000000 100%);
-
             cursor: pointer;
-
             transition: opacity 0.7s ease;
         }
 
@@ -52,7 +42,6 @@
             font-size: 28px;
             font-weight: bold;
             letter-spacing: 5px;
-
             color: white;
 
             text-shadow:
@@ -69,12 +58,9 @@
             pointer-events: none;
         }
 
-        /* MAIN PAGE */
-
         h1 {
             margin-top: 70px;
             margin-bottom: 10px;
-
             font-family: "Courier New", monospace;
             font-size: 48px;
             letter-spacing: 4px;
@@ -105,15 +91,11 @@
             background: rgba(20, 0, 30, 0.8);
             border: 2px solid #9b30ff;
             border-radius: 14px;
-
             color: white;
-
             font-family: Arial, sans-serif;
             font-size: 18px;
             font-weight: bold;
-
             padding: 17px 25px;
-
             text-decoration: none;
 
             box-shadow:
@@ -127,7 +109,6 @@
 
         .button:hover {
             transform: translateY(-4px) scale(1.02);
-
             background: rgba(90, 10, 130, 0.5);
 
             box-shadow:
@@ -143,12 +124,9 @@
         footer {
             margin-top: auto;
             padding: 30px;
-
             color: #6f6178;
             font-size: 13px;
         }
-
-        /* ANIMATIONS */
 
         @keyframes glow {
             from {
@@ -204,21 +182,15 @@
 
 <body>
 
-    <!-- CLICK TO ENTER SCREEN -->
-
     <div id="enter-screen">
         <div id="enter-text">
             CLICK TO ENTER
         </div>
     </div>
 
-    <!-- HIDDEN MUSIC -->
-
     <audio id="tuffMusic" loop preload="auto">
         <source src="Tuff.mp3" type="audio/mpeg">
     </audio>
-
-    <!-- MAIN PAGE -->
 
     <h1>GUY777 MOD HUB</h1>
 
@@ -254,10 +226,6 @@
         </a>
 
     </div>
-
-    <footer>
-        GUY777 MOD HUB © 2026
-    </footer>
 
     <script>
         const enterScreen = document.getElementById("enter-screen");

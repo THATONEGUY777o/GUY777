@@ -1,4 +1,4 @@
-```html id="7r2p9m"
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,13 +101,13 @@
 
         .music-player {
             margin-top: 35px;
-            padding: 18px;
-
             width: min(90%, 450px);
 
             background: rgba(20, 0, 30, 0.8);
             border: 2px solid #9b30ff;
             border-radius: 14px;
+
+            padding: 18px;
 
             box-shadow:
                 0 0 10px rgba(155, 48, 255, 0.4);
@@ -124,8 +124,38 @@
                 0 0 8px #9b30ff;
         }
 
-        audio {
+        .music-button {
             width: 100%;
+
+            background: #180022;
+            border: 2px solid #9b30ff;
+            border-radius: 12px;
+
+            color: white;
+
+            padding: 14px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.2s ease;
+        }
+
+        .music-button:hover {
+            background: #4b096b;
+
+            box-shadow:
+                0 0 10px #9b30ff,
+                0 0 25px #9b30ff;
+        }
+
+        .music-button:active {
+            transform: scale(0.97);
         }
 
         footer {
@@ -208,7 +238,7 @@
 
     </div>
 
-    <!-- MUSIC: TUFF -->
+    <!-- TUFF MUSIC -->
 
     <div class="music-player">
 
@@ -216,9 +246,12 @@
             🎵 Tuff
         </span>
 
-        <audio controls loop>
+        <button class="music-button" id="musicButton">
+            ▶ Play Tuff
+        </button>
+
+        <audio id="tuffMusic" loop preload="auto">
             <source src="Tuff.mp3" type="audio/mpeg">
-            Your browser does not support audio.
         </audio>
 
     </div>
@@ -226,6 +259,30 @@
     <footer>
         GUY777 MOD HUB © 2026
     </footer>
+
+    <script>
+        const music = document.getElementById("tuffMusic");
+        const musicButton = document.getElementById("musicButton");
+
+        musicButton.addEventListener("click", async () => {
+            try {
+                if (music.paused) {
+                    await music.play();
+                    musicButton.textContent = "⏸ Pause Tuff";
+                } else {
+                    music.pause();
+                    musicButton.textContent = "▶ Play Tuff";
+                }
+            } catch (error) {
+                console.error("Could not play music:", error);
+                musicButton.textContent = "⚠️ Could not play Tuff";
+            }
+        });
+
+        music.addEventListener("ended", () => {
+            musicButton.textContent = "▶ Play Tuff";
+        });
+    </script>
 
 </body>
 </html>

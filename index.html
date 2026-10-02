@@ -140,15 +140,6 @@
             animation: glow 2s infinite alternate;
         }
 
-        .subtitle {
-            position: relative;
-            z-index: 2;
-
-            color: #b9a5c9;
-            margin-bottom: 45px;
-            font-size: 16px;
-        }
-
         .buttons {
             position: relative;
             z-index: 2;
@@ -247,10 +238,6 @@
                 letter-spacing: 3px;
             }
 
-            .subtitle {
-                margin-bottom: 30px;
-            }
-
             .button {
                 font-size: 16px;
                 padding: 15px;
@@ -272,7 +259,7 @@
     </div>
 
     <!-- Random Music -->
-    <audio id="music" loop preload="auto"></audio>
+    <audio id="music" preload="auto"></audio>
 
     <!-- Title -->
     <h1>GUY777 MOD HUB</h1>
@@ -310,6 +297,16 @@
             Lighting Launcher
         </a>
 
+        <a href="https://github.com/Lumince/singularity"
+           class="button">
+            Singularity root
+        </a>
+
+        <a href="https://www.mediafire.com/folder/g5fp1mb6zbojm/Root"
+           class="button">
+            Root mods
+        </a>
+
     </div>
 
     <script>
@@ -321,7 +318,8 @@
 
             star.classList.add("star");
 
-            star.style.left = Math.random() * 100 + "vw";
+            star.style.left =
+                Math.random() * 100 + "vw";
 
             star.style.animationDuration =
                 (3 + Math.random() * 5) + "s";
@@ -329,7 +327,8 @@
             star.style.animationDelay =
                 Math.random() * 5 + "s";
 
-            const size = 1 + Math.random() * 3;
+            const size =
+                1 + Math.random() * 3;
 
             star.style.width = size + "px";
             star.style.height = size + "px";
@@ -338,7 +337,8 @@
         }
 
         /* Random music */
-        const music = document.getElementById("music");
+        const music =
+            document.getElementById("music");
 
         const songs = [
             "Tuff.mp3",
@@ -355,23 +355,27 @@
         const enterScreen =
             document.getElementById("enter-screen");
 
-        enterScreen.addEventListener("click", async () => {
-            try {
-                await music.play();
+        enterScreen.addEventListener(
+            "click",
+            async () => {
 
-                enterScreen.classList.add("hidden");
+                try {
+                    await music.play();
 
-                setTimeout(() => {
-                    enterScreen.remove();
-                }, 700);
+                    enterScreen.classList.add("hidden");
 
-            } catch (error) {
-                console.error(
-                    "Could not start:",
-                    error
-                );
+                    setTimeout(() => {
+                        enterScreen.remove();
+                    }, 700);
+
+                } catch (error) {
+                    console.error(
+                        "Could not start:",
+                        error
+                    );
+                }
             }
-        });
+        );
     </script>
 
 </body>

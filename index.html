@@ -614,10 +614,9 @@
         }
 
    
-musicToggle.addEventListener("click", () => {
-    const turnMusicOff = !music.paused && !music.muted;
 
-    if (turnMusicOff) {
+musicToggle.addEventListener("click", async () => {
+    if (!music.paused && !music.muted) {
         music.pause();
         music.muted = true;
 
@@ -627,25 +626,23 @@ musicToggle.addEventListener("click", () => {
         musicToggle.setAttribute("aria-label", "Turn music on");
 
         stopEqualizer();
-    } else {
-        music.muted = false;
+        return;
+    }
+
+    music.muted = false;
+
+    try {
+        await music.play();
 
         musicStatus.textContent = "Music on";
         musicToggle.classList.remove("muted");
         musicToggle.setAttribute("aria-pressed", "false");
         musicToggle.setAttribute("aria-label", "Turn music off");
 
-        if (music.paused) {
-            music.play()
-                .then(() => {
-                    startEqualizer();
-                })
-                .catch(error => {
-                    console.error("Could not play music:", error);
-                });
-        } else {
-            startEqualizer();
-        }
+        startEqualizer();
+    } catch (error) {
+        console.error("Could not play music:", error);
+        musicStatus.textContent = "Unable to play music";
     }
 });
 

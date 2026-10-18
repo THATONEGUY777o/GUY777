@@ -35,66 +35,6 @@
             align-items: center;
         }
 
-        /* Purple glowing equalizer */
-        .equalizer {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            height: 55px;
-            width: min(85%, 300px);
-            margin: -12px 0 25px;
-            opacity: 0.35;
-            transition: opacity 0.3s ease;
-        }
-
-        .equalizer span {
-            display: block;
-            width: 5px;
-            height: 8px;
-            flex-shrink: 0;
-            border-radius: 5px;
-            background: #a020f0;
-            box-shadow:
-                0 0 6px #a020f0,
-                0 0 12px #8a2be2,
-                0 0 20px rgba(160, 32, 240, 0.7);
-        }
-
-        .equalizer.playing {
-            opacity: 1;
-        }
-
-        .equalizer.playing span {
-            animation: equalize 0.7s ease-in-out infinite alternate;
-        }
-
-        .equalizer.playing span:nth-child(2n) {
-            animation-duration: 0.45s;
-        }
-
-        .equalizer.playing span:nth-child(3n) {
-            animation-duration: 0.9s;
-        }
-
-        .equalizer.playing span:nth-child(4n) {
-            animation-duration: 0.55s;
-        }
-
-        @keyframes equalize {
-            0% {
-                height: 6px;
-                opacity: 0.65;
-            }
-
-            100% {
-                height: 45px;
-                opacity: 1;
-            }
-        }
-
         /* Falling stars */
         #stars {
             position: fixed;
@@ -107,13 +47,9 @@
         .star {
             position: absolute;
             top: -10px;
-            width: 2px;
-            height: 2px;
             background: white;
             border-radius: 50%;
-            box-shadow:
-                0 0 6px white,
-                0 0 12px #a020f0;
+            box-shadow: 0 0 6px white, 0 0 12px #a020f0;
             animation: fall linear infinite;
         }
 
@@ -158,7 +94,7 @@
             letter-spacing: 5px;
             color: white;
             text-shadow:
-                0 0 5px #ffffff,
+                0 0 5px #fff,
                 0 0 15px #a020f0,
                 0 0 30px #8a2be2,
                 0 0 60px #8a2be2;
@@ -180,14 +116,14 @@
             font-size: 48px;
             letter-spacing: 4px;
             text-shadow:
-                0 0 5px #ffffff,
+                0 0 5px #fff,
                 0 0 15px #a020f0,
                 0 0 30px #8a2be2,
                 0 0 60px #8a2be2;
             animation: glow 2s infinite alternate;
         }
 
-        /* Music toggle button */
+        /* Music toggle */
         .music-toggle {
             position: relative;
             z-index: 2;
@@ -248,6 +184,41 @@
             background: #77737f;
         }
 
+        /* Real audio equalizer */
+        .equalizer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: min(90%, 340px);
+            height: 65px;
+            margin: -12px 0 25px;
+            opacity: 0.35;
+            transition: opacity 0.2s ease;
+        }
+
+        .equalizer span {
+            display: block;
+            flex: 1;
+            min-width: 2px;
+            max-width: 8px;
+            height: 3px;
+            border-radius: 5px;
+            background: #a020f0;
+            box-shadow:
+                0 0 6px #a020f0,
+                0 0 12px #8a2be2,
+                0 0 20px rgba(160, 32, 240, 0.7);
+
+            will-change: height;
+        }
+
+        .equalizer.playing {
+            opacity: 1;
+        }
+
         /* Download buttons */
         .buttons {
             position: relative;
@@ -300,14 +271,14 @@
         @keyframes glow {
             from {
                 text-shadow:
-                    0 0 5px #ffffff,
+                    0 0 5px white,
                     0 0 15px #8a2be2,
                     0 0 30px #8a2be2;
             }
 
             to {
                 text-shadow:
-                    0 0 10px #ffffff,
+                    0 0 10px white,
                     0 0 25px #a020f0,
                     0 0 50px #a020f0,
                     0 0 80px #8a2be2;
@@ -326,7 +297,6 @@
             }
         }
 
-        /* Mobile layout */
         @media (max-width: 600px) {
             h1 {
                 font-size: 32px;
@@ -348,6 +318,10 @@
                 font-size: 22px;
                 padding: 14px 22px;
             }
+
+            .equalizer {
+                gap: 3px;
+            }
         }
     </style>
 </head>
@@ -368,7 +342,7 @@
     <!-- Title -->
     <h1>GUY777 MOD HUB</h1>
 
-    <!-- Music on/off button -->
+    <!-- Music toggle -->
     <button
         id="music-toggle"
         class="music-toggle"
@@ -385,27 +359,23 @@
         <span id="music-status">Music on</span>
     </button>
 
-    <!-- Purple Music Equalizer -->
+    <!-- Purple audio visualizer -->
     <div
         id="equalizer"
         class="equalizer"
-        aria-label="Music visualizer"
+        role="img"
+        aria-label="Live music frequency visualizer"
     >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
     </div>
 
     <!-- Download buttons -->
@@ -446,15 +416,12 @@
             star.classList.add("star");
 
             star.style.left = Math.random() * 100 + "vw";
-
             star.style.animationDuration =
                 (3 + Math.random() * 5) + "s";
-
             star.style.animationDelay =
                 Math.random() * 5 + "s";
 
             const size = 1 + Math.random() * 3;
-
             star.style.width = size + "px";
             star.style.height = size + "px";
 
@@ -472,10 +439,9 @@
             "3.mp3"
         ];
 
-        const randomSong =
+        music.src =
             songs[Math.floor(Math.random() * songs.length)];
 
-        music.src = randomSong;
         music.loop = true;
 
         /* Music toggle */
@@ -485,6 +451,162 @@
         const musicStatus =
             document.getElementById("music-status");
 
+        const equalizer =
+            document.getElementById("equalizer");
+
+        const bars = Array.from(
+            equalizer.querySelectorAll("span")
+        );
+
+        /* Audio analyser */
+        let audioContext = null;
+        let analyser = null;
+        let frequencyData = null;
+        let audioSource = null;
+        let animationFrame = null;
+        let smoothedLevels = bars.map(() => 0);
+
+        function setupAnalyser() {
+            if (audioContext) {
+                return audioContext.resume();
+            }
+
+            const AudioContextClass =
+                window.AudioContext ||
+                window.webkitAudioContext;
+
+            if (!AudioContextClass) {
+                throw new Error(
+                    "Web Audio API is not supported by this browser."
+                );
+            }
+
+            audioContext = new AudioContextClass();
+
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 2048;
+            analyser.smoothingTimeConstant = 0.72;
+            analyser.minDecibels = -90;
+            analyser.maxDecibels = -15;
+
+            frequencyData = new Uint8Array(
+                analyser.frequencyBinCount
+            );
+
+            audioSource =
+                audioContext.createMediaElementSource(music);
+
+            audioSource.connect(analyser);
+            analyser.connect(audioContext.destination);
+
+            return audioContext.resume();
+        }
+
+        /* Draw bars from actual audio frequencies */
+        function drawEqualizer() {
+            animationFrame = null;
+
+            if (!analyser || !frequencyData) {
+                return;
+            }
+
+            if (
+                music.paused ||
+                music.ended ||
+                music.muted ||
+                audioContext.state !== "running"
+            ) {
+                equalizer.classList.remove("playing");
+
+                bars.forEach((bar, index) => {
+                    smoothedLevels[index] *= 0.75;
+
+                    bar.style.height =
+                        (2 + smoothedLevels[index] * 48) + "px";
+                });
+
+                return;
+            }
+
+            equalizer.classList.add("playing");
+
+            analyser.getByteFrequencyData(frequencyData);
+
+            const binCount = frequencyData.length;
+            const barCount = bars.length;
+
+            bars.forEach((bar, index) => {
+                /*
+                 * Spread the bars across the frequency spectrum.
+                 * Lower bars represent bass; higher indices
+                 * represent mids and treble.
+                 */
+                const start = Math.floor(
+                    Math.pow(index / barCount, 2) * binCount
+                );
+
+                const end = Math.max(
+                    start + 1,
+                    Math.floor(
+                        Math.pow((index + 1) / barCount, 2) *
+                        binCount
+                    )
+                );
+
+                let total = 0;
+                let count = 0;
+
+                for (
+                    let bin = start;
+                    bin < Math.min(end, binCount);
+                    bin++
+                ) {
+                    total += frequencyData[bin];
+                    count++;
+                }
+
+                const level = count > 0
+                    ? total / count / 255
+                    : 0;
+
+                /* Smooth the movement */
+                smoothedLevels[index] +=
+                    (level - smoothedLevels[index]) * 0.35;
+
+                const height = Math.max(
+                    3,
+                    3 + smoothedLevels[index] * 55
+                );
+
+                bar.style.height = height + "px";
+            });
+
+            animationFrame =
+                requestAnimationFrame(drawEqualizer);
+        }
+
+        function startEqualizer() {
+            if (animationFrame === null) {
+                animationFrame =
+                    requestAnimationFrame(drawEqualizer);
+            }
+        }
+
+        function stopEqualizer() {
+            if (animationFrame !== null) {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = null;
+            }
+
+            equalizer.classList.remove("playing");
+
+            bars.forEach((bar) => {
+                bar.style.height = "3px";
+            });
+
+            smoothedLevels = bars.map(() => 0);
+        }
+
         musicToggle.addEventListener("click", () => {
             music.muted = !music.muted;
 
@@ -493,52 +615,37 @@
                 musicToggle.classList.add("muted");
 
                 musicToggle.setAttribute(
-                    "aria-pressed",
-                    "true"
+                    "aria-pressed", "true"
                 );
 
                 musicToggle.setAttribute(
-                    "aria-label",
-                    "Unmute music"
+                    "aria-label", "Unmute music"
                 );
+
+                stopEqualizer();
             } else {
                 musicStatus.textContent = "Music on";
                 musicToggle.classList.remove("muted");
 
                 musicToggle.setAttribute(
-                    "aria-pressed",
-                    "false"
+                    "aria-pressed", "false"
                 );
 
                 musicToggle.setAttribute(
-                    "aria-label",
-                    "Mute music"
+                    "aria-label", "Mute music"
                 );
-            }
 
-            updateEqualizer();
+                if (!music.paused && !music.ended) {
+                    startEqualizer();
+                }
+            }
         });
 
-        /* Purple Equalizer */
-        const equalizer =
-            document.getElementById("equalizer");
+        music.addEventListener("play", startEqualizer);
 
-        function updateEqualizer() {
-            const shouldAnimate =
-                !music.paused &&
-                !music.muted &&
-                !music.ended;
+        music.addEventListener("pause", stopEqualizer);
 
-            equalizer.classList.toggle(
-                "playing",
-                shouldAnimate
-            );
-        }
-
-        music.addEventListener("play", updateEqualizer);
-        music.addEventListener("pause", updateEqualizer);
-        music.addEventListener("ended", updateEqualizer);
-        music.addEventListener("volumechange", updateEqualizer);
+        music.addEventListener("ended", stopEqualizer);
 
         /* Enter screen */
         const enterScreen =
@@ -546,9 +653,15 @@
 
         enterScreen.addEventListener("click", async () => {
             try {
+                /*
+                 * Initialize the analyser during the user's
+                 * click, allowing audio on supported browsers.
+                 */
+                await setupAnalyser();
+
                 await music.play();
 
-                updateEqualizer();
+                startEqualizer();
 
                 enterScreen.classList.add("hidden");
 
@@ -558,7 +671,7 @@
 
             } catch (error) {
                 console.error(
-                    "Could not start music:",
+                    "Could not start music or analyser:",
                     error
                 );
             }

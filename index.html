@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,6 @@
         body {
             margin: 0;
             min-height: 100vh;
-
             background:
                 linear-gradient(
                     rgba(10, 0, 20, 0.35),
@@ -51,11 +51,7 @@
             height: 2px;
             background: white;
             border-radius: 50%;
-
-            box-shadow:
-                0 0 6px white,
-                0 0 12px #a020f0;
-
+            box-shadow: 0 0 6px white, 0 0 12px #a020f0;
             animation: fall linear infinite;
         }
 
@@ -64,21 +60,16 @@
                 transform: translateY(-10px);
                 opacity: 0;
             }
-
-            10% {
+            10%, 90% {
                 opacity: 1;
             }
-
-            90% {
-                opacity: 1;
-            }
-
             100% {
                 transform: translateY(110vh);
                 opacity: 0;
             }
         }
 
+        /* Enter screen */
         #enter-screen {
             position: fixed;
             inset: 0;
@@ -86,15 +77,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle,
-                    #2b0645 0%,
-                    #08000d 50%,
-                    #000000 100%
-                );
-
+            background: radial-gradient(
+                circle,
+                #2b0645 0%,
+                #08000d 50%,
+                #000000 100%
+            );
             cursor: pointer;
             transition: opacity 0.7s ease;
         }
@@ -105,13 +93,11 @@
             font-weight: bold;
             letter-spacing: 5px;
             color: white;
-
             text-shadow:
                 0 0 5px #ffffff,
                 0 0 15px #a020f0,
                 0 0 30px #8a2be2,
                 0 0 60px #8a2be2;
-
             animation: enterGlow 1.5s infinite alternate;
         }
 
@@ -120,30 +106,88 @@
             pointer-events: none;
         }
 
+        /* Title */
         h1 {
             position: relative;
             z-index: 2;
-
             margin-top: 70px;
-            margin-bottom: 10px;
-
+            margin-bottom: 20px;
             font-family: "Courier New", monospace;
             font-size: 48px;
             letter-spacing: 4px;
-
             text-shadow:
                 0 0 5px #ffffff,
                 0 0 15px #a020f0,
                 0 0 30px #8a2be2,
                 0 0 60px #8a2be2;
-
             animation: glow 2s infinite alternate;
         }
 
+        /* Music toggle button */
+        .music-toggle {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0 25px;
+            padding: 16px 25px;
+            min-width: 280px;
+            border: 3px solid #34333d;
+            border-radius: 60px;
+            background: rgba(25, 23, 29, 0.94);
+            color: #f4f1f7;
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(160, 32, 240, 0.12);
+            transition: 0.25s ease;
+        }
+
+        .music-toggle:hover {
+            border-color: #a020f0;
+            box-shadow: 0 0 18px rgba(160, 32, 240, 0.45);
+        }
+
+        .music-toggle:active {
+            transform: scale(0.97);
+        }
+
+        .music-icon {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 30px;
+        }
+
+        .music-icon span {
+            display: block;
+            width: 8px;
+            border-radius: 3px;
+            background: #ff5268;
+        }
+
+        .music-icon span:nth-child(1) {
+            height: 12px;
+        }
+
+        .music-icon span:nth-child(2) {
+            height: 21px;
+        }
+
+        .music-icon span:nth-child(3) {
+            height: 30px;
+        }
+
+        .music-toggle.muted .music-icon span {
+            background: #77737f;
+        }
+
+        /* Download buttons */
         .buttons {
             position: relative;
             z-index: 2;
-
             display: flex;
             flex-direction: column;
             gap: 18px;
@@ -155,17 +199,12 @@
             border: 2px solid #9b30ff;
             border-radius: 14px;
             color: white;
-
             font-family: Arial, sans-serif;
             font-size: 18px;
             font-weight: bold;
-
             padding: 17px 25px;
             text-decoration: none;
-
-            box-shadow:
-                0 0 8px rgba(155, 48, 255, 0.4);
-
+            box-shadow: 0 0 8px rgba(155, 48, 255, 0.4);
             transition:
                 transform 0.25s ease,
                 box-shadow 0.25s ease,
@@ -174,9 +213,7 @@
 
         .button:hover {
             transform: translateY(-4px) scale(1.02);
-
             background: rgba(90, 10, 130, 0.5);
-
             box-shadow:
                 0 0 10px #9b30ff,
                 0 0 25px #9b30ff,
@@ -190,10 +227,8 @@
         footer {
             position: relative;
             z-index: 2;
-
             margin-top: auto;
             padding: 30px;
-
             color: #6f6178;
             font-size: 13px;
         }
@@ -205,7 +240,6 @@
                     0 0 15px #8a2be2,
                     0 0 30px #8a2be2;
             }
-
             to {
                 text-shadow:
                     0 0 10px #ffffff,
@@ -220,7 +254,6 @@
                 opacity: 0.65;
                 transform: scale(1);
             }
-
             to {
                 opacity: 1;
                 transform: scale(1.05);
@@ -242,6 +275,12 @@
                 font-size: 16px;
                 padding: 15px;
             }
+
+            .music-toggle {
+                min-width: 250px;
+                font-size: 22px;
+                padding: 14px 22px;
+            }
         }
     </style>
 </head>
@@ -253,59 +292,57 @@
 
     <!-- Enter screen -->
     <div id="enter-screen">
-        <div id="enter-text">
-            CLICK TO ENTER
-        </div>
+        <div id="enter-text">CLICK TO ENTER</div>
     </div>
 
-    <!-- Random Music -->
+    <!-- Music player -->
     <audio id="music" preload="auto"></audio>
 
     <!-- Title -->
     <h1>GUY777 MOD HUB</h1>
 
-    <!-- Buttons -->
+    <!-- Music on/off button -->
+    <button
+        id="music-toggle"
+        class="music-toggle"
+        type="button"
+        aria-pressed="false"
+        aria-label="Mute music"
+    >
+        <span class="music-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <span id="music-status">Music on</span>
+    </button>
+
+    <!-- Download buttons -->
     <div class="buttons">
 
         <a href="https://www.mediafire.com/file/swfd0uh2fvariu7/DeltaV67.apk/file"
-           class="button">
-            Delta
-        </a>
+           class="button">Delta</a>
 
         <a href="https://www.mediafire.com/file/pdomsm1was8gsx3/TheOcularMigraine.apk/file"
-           class="button">
-            Ocular Migraine
-        </a>
+           class="button">Ocular Migraine</a>
 
         <a href="https://www.mediafire.com/file/lm1sx36yt7j3xav/xere1.apk/file"
-           class="button">
-            67 ADB
-        </a>
+           class="button">67 ADB</a>
 
         <a href="https://www.mediafire.com/file/fm1kd2pnfw2co6q/Moonlit.apk/file"
-           class="button">
-            Old moonlit
-        </a>
+           class="button">Old moonlit</a>
 
         <a href="https://www.mediafire.com/file/z7oa9kohpjej2hb/MoonlitV2.apk/file"
-           class="button">
-            Moonlit New
-        </a>
+           class="button">Moonlit New</a>
 
         <a href="https://www.meta.com/experiences/app/8715195505254856/?hwsh=Z12QNUkVlu&utm_source=twilight&utm_medium=SHARE&utm_parent=SHARING&utm_cohort=ORGANIC_UNKNOWN"
-           class="button">
-            Lighting Launcher
-        </a>
+           class="button">Lighting Launcher</a>
 
         <a href="https://github.com/Lumince/singularity"
-           class="button">
-            Singularity root
-        </a>
+           class="button">Singularity root</a>
 
         <a href="https://www.mediafire.com/folder/g5fp1mb6zbojm/Root"
-           class="button">
-            Root mods
-        </a>
+           class="button">Root mods</a>
 
     </div>
 
@@ -315,21 +352,15 @@
 
         for (let i = 0; i < 80; i++) {
             const star = document.createElement("div");
-
             star.classList.add("star");
 
-            star.style.left =
-                Math.random() * 100 + "vw";
-
+            star.style.left = Math.random() * 100 + "vw";
             star.style.animationDuration =
                 (3 + Math.random() * 5) + "s";
-
             star.style.animationDelay =
                 Math.random() * 5 + "s";
 
-            const size =
-                1 + Math.random() * 3;
-
+            const size = 1 + Math.random() * 3;
             star.style.width = size + "px";
             star.style.height = size + "px";
 
@@ -337,16 +368,15 @@
         }
 
         /* Random music */
-        const music =
-            document.getElementById("music");
+        const music = document.getElementById("music");
 
         const songs = [
-        "Tuff.mp3",
-        "JANE.mp3",
-        "1.mp3",
-        "2.mp3",
-        "3.mp3"
-];
+            "Tuff.mp3",
+            "JANE.mp3",
+            "1.mp3",
+            "2.mp3",
+            "3.mp3"
+        ];
 
         const randomSong =
             songs[Math.floor(Math.random() * songs.length)];
@@ -354,31 +384,42 @@
         music.src = randomSong;
         music.loop = true;
 
-        /* Enter screen */
-        const enterScreen =
-            document.getElementById("enter-screen");
+        /* Music toggle */
+        const musicToggle = document.getElementById("music-toggle");
+        const musicStatus = document.getElementById("music-status");
 
-        enterScreen.addEventListener(
-            "click",
-            async () => {
+        musicToggle.addEventListener("click", () => {
+            music.muted = !music.muted;
 
-                try {
-                    await music.play();
-
-                    enterScreen.classList.add("hidden");
-
-                    setTimeout(() => {
-                        enterScreen.remove();
-                    }, 700);
-
-                } catch (error) {
-                    console.error(
-                        "Could not start:",
-                        error
-                    );
-                }
+            if (music.muted) {
+                musicStatus.textContent = "Music off";
+                musicToggle.classList.add("muted");
+                musicToggle.setAttribute("aria-pressed", "true");
+                musicToggle.setAttribute("aria-label", "Unmute music");
+            } else {
+                musicStatus.textContent = "Music on";
+                musicToggle.classList.remove("muted");
+                musicToggle.setAttribute("aria-pressed", "false");
+                musicToggle.setAttribute("aria-label", "Mute music");
             }
-        );
+        });
+
+        /* Enter screen */
+        const enterScreen = document.getElementById("enter-screen");
+
+        enterScreen.addEventListener("click", async () => {
+            try {
+                await music.play();
+
+                enterScreen.classList.add("hidden");
+
+                setTimeout(() => {
+                    enterScreen.remove();
+                }, 700);
+            } catch (error) {
+                console.error("Could not start music:", error);
+            }
+        });
     </script>
 
 </body>

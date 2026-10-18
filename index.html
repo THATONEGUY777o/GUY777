@@ -6,6 +6,23 @@
 
     <title>GUY777 MOD HUB</title>
 
+/* Current song title */
+.song-name {
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+    margin: -12px 0 22px;
+    color: #d9a3ff;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow:
+        0 0 5px #a020f0,
+        0 0 12px #8a2be2;
+    overflow-wrap: anywhere;
+}
+
+
     <style>
         * {
             box-sizing: border-box;
@@ -363,6 +380,12 @@
         </span>
 
         <span id="music-status">Music on</span>
+    
+        
+<div id="song-name" class="song-name">
+    Now playing: Loading...
+</div>
+    
     </button>
 
     <!-- Purple audio visualizer -->
@@ -434,21 +457,71 @@
             stars.appendChild(star);
         }
 
-        /* Random music */
-        const music = document.getElementById("music");
+        
+/* Music playlist */
+const music = document.getElementById("music");
+const songName = document.getElementById("song-name");
 
-        const songs = [
-            "✻H+3+ЯД✻7luCJIo0T6... (second drop + super slowed) - vyrval.mp3",
-            "Jane! (HoodTrap) - Qura.mp3",
-            "Born to pwn - Twikipedia.mp3",
-            "Super Fênix Ritimada (2 mins 12 secs) - Notmuchxhead.mp3",
-            "Where have you been - Kryd.mp3"
-        ];
+const songs = [
+    {
+        title: "✻H+3+ЯД✻7luCJIo0T6... (Second Drop + Super Slowed) - vyrval",
+        file: "✻H+3+ЯД✻7luCJIo0T6... (second drop + super slowed) - vyrval.mp3"
+    },
+    {
+        title: "Jane! (HoodTrap) - Qura",
+        file: "Jane! (HoodTrap) - Qura.mp3"
+    },
+    {
+        title: "Born to pwn - Twikipedia",
+        file: "Born to pwn - Twikipedia.mp3"
+    },
+    {
+        title: "Super Fênix Ritimada - Notmuchxhead",
+        file: "Super Fênix Ritimada (2 mins 12 secs) - Notmuchxhead.mp3"
+    },
+    {
+        title: "Where have you been - Kryd",
+        file: "Where have you been - Kryd.mp3"
+    }
+];
 
-        music.src =
-            songs[Math.floor(Math.random() * songs.length)];
+let currentSongIndex = Math.floor(Math.random() * songs.length);
 
-        music.loop = true;
+function loadSong(index) {
+    currentSongIndex = index;
+
+    music.src = songs[index].file;
+    songName.textContent = "Now playing: " + songs[index].title;
+
+    music.load();
+}
+
+/* Pick a random song to start */
+loadSong(currentSongIndex);
+
+/* Play a different song when the current one finishes */
+music.loop = false;
+
+music.addEventListener("ended", async () => {
+    let nextSongIndex;
+
+    do {
+        nextSongIndex = Math.floor(Math.random() * songs.length);
+    } while (
+        songs.length > 1 &&
+        nextSongIndex === currentSongIndex
+    );
+
+    loadSong(nextSongIndex);
+
+    try {
+        await music.play();
+    } catch (error) {
+        console.error("Could not play the next song:", error);
+        songName.textContent =
+            "Couldn't play: " + songs[nextSongIndex].title;
+    }
+});
 
         /* Music toggle */
         const musicToggle =

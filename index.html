@@ -12,6 +12,65 @@
             box-sizing: border-box;
         }
 
+        /* Purple glowing equalizer */
+.equalizer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 55px;
+    width: min(85%, 300px);
+    margin: -12px 0 25px;
+    opacity: 0.35;
+    transition: opacity 0.3s ease;
+}
+
+.equalizer span {
+    display: block;
+    width: 5px;
+    height: 8px;
+    border-radius: 5px;
+    background: #a020f0;
+    box-shadow:
+        0 0 6px #a020f0,
+        0 0 12px #8a2be2,
+        0 0 20px rgba(160, 32, 240, 0.7);
+}
+
+.equalizer.playing {
+    opacity: 1;
+}
+
+.equalizer.playing span {
+    animation: equalize 0.7s ease-in-out infinite alternate;
+}
+
+.equalizer.playing span:nth-child(2n) {
+    animation-duration: 0.45s;
+}
+
+.equalizer.playing span:nth-child(3n) {
+    animation-duration: 0.9s;
+}
+
+.equalizer.playing span:nth-child(4n) {
+    animation-duration: 0.55s;
+}
+
+@keyframes equalize {
+    0% {
+        height: 6px;
+        opacity: 0.65;
+    }
+
+    100% {
+        height: 45px;
+        opacity: 1;
+    }
+}
+
         body {
             margin: 0;
             min-height: 100vh;
@@ -183,6 +242,25 @@
         .music-toggle.muted .music-icon span {
             background: #77737f;
         }
+
+        <!-- Purple Music Equalizer -->
+<div id="equalizer" class="equalizer" aria-label="Music visualizer">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
         /* Download buttons */
         .buttons {
@@ -384,6 +462,7 @@
         music.src = randomSong;
         music.loop = true;
 
+
         /* Music toggle */
         const musicToggle = document.getElementById("music-toggle");
         const musicStatus = document.getElementById("music-status");
@@ -403,6 +482,45 @@
                 musicToggle.setAttribute("aria-label", "Mute music");
             }
         });
+
+        /* Purple Equalizer */
+        const equalizer = document.getElementById("equalizer");
+
+        function updateEqualizer() {
+            const shouldAnimate =
+                !music.paused &&
+                !music.muted &&
+                !music.ended;
+
+            equalizer.classList.toggle(
+                "playing",
+                shouldAnimate
+            );
+        }
+
+        music.addEventListener("play", updateEqualizer);
+        music.addEventListener("pause", updateEqualizer);
+        music.addEventListener("ended", updateEqualizer);
+        music.addEventListener("volumechange", updateEqualizer);
+
+        /* Enter screen */
+        const enterScreen = document.getElementById("enter-screen");
+
+        enterScreen.addEventListener("click", async () => {
+            try {
+                await music.play();
+                updateEqualizer();
+
+                enterScreen.classList.add("hidden");
+
+                setTimeout(() => {
+                    enterScreen.remove();
+                }, 700);
+            } catch (error) {
+                console.error("Could not start music:", error);
+            }
+        });
+
 
         /* Enter screen */
         const enterScreen = document.getElementById("enter-screen");

@@ -154,35 +154,42 @@
             transform: scale(0.97);
         }
 
-        .music-icon {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            height: 30px;
-        }
 
-        .music-icon span {
-            display: block;
-            width: 8px;
-            border-radius: 3px;
-            background: #ff5268;
-        }
+.music-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 30px;
+}
 
-        .music-icon span:nth-child(1) {
-            height: 12px;
-        }
+.music-icon span {
+    display: block;
+    width: 8px;
+    border-radius: 3px;
+    background: #a020f0;
+    box-shadow:
+        0 0 6px #a020f0,
+        0 0 12px #8a2be2;
+    transition: background 0.25s ease;
+}
 
-        .music-icon span:nth-child(2) {
-            height: 21px;
-        }
+.music-icon span:nth-child(1) {
+    height: 12px;
+}
 
-        .music-icon span:nth-child(3) {
-            height: 30px;
-        }
+.music-icon span:nth-child(2) {
+    height: 21px;
+}
 
-        .music-toggle.muted .music-icon span {
-            background: #77737f;
-        }
+.music-icon span:nth-child(3) {
+    height: 30px;
+}
+
+.music-toggle.muted .music-icon span {
+    background: #77737f;
+    box-shadow: none;
+}
+
 
         /* Real audio equalizer */
         .equalizer {
@@ -607,39 +614,41 @@
             smoothedLevels = bars.map(() => 0);
         }
 
-        musicToggle.addEventListener("click", () => {
-            music.muted = !music.muted;
+   
+musicToggle.addEventListener("click", () => {
+    const turnMusicOff = !music.paused && !music.muted;
 
-            if (music.muted) {
-                musicStatus.textContent = "Music off";
-                musicToggle.classList.add("muted");
+    if (turnMusicOff) {
+        music.pause();
+        music.muted = true;
 
-                musicToggle.setAttribute(
-                    "aria-pressed", "true"
-                );
+        musicStatus.textContent = "Music off";
+        musicToggle.classList.add("muted");
+        musicToggle.setAttribute("aria-pressed", "true");
+        musicToggle.setAttribute("aria-label", "Turn music on");
 
-                musicToggle.setAttribute(
-                    "aria-label", "Unmute music"
-                );
+        stopEqualizer();
+    } else {
+        music.muted = false;
 
-                stopEqualizer();
-            } else {
-                musicStatus.textContent = "Music on";
-                musicToggle.classList.remove("muted");
+        musicStatus.textContent = "Music on";
+        musicToggle.classList.remove("muted");
+        musicToggle.setAttribute("aria-pressed", "false");
+        musicToggle.setAttribute("aria-label", "Turn music off");
 
-                musicToggle.setAttribute(
-                    "aria-pressed", "false"
-                );
-
-                musicToggle.setAttribute(
-                    "aria-label", "Mute music"
-                );
-
-                if (!music.paused && !music.ended) {
+        if (music.paused) {
+            music.play()
+                .then(() => {
                     startEqualizer();
-                }
-            }
-        });
+                })
+                .catch(error => {
+                    console.error("Could not play music:", error);
+                });
+        } else {
+            startEqualizer();
+        }
+    }
+});
 
         music.addEventListener("play", startEqualizer);
 

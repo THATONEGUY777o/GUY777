@@ -12,65 +12,6 @@
             box-sizing: border-box;
         }
 
-        /* Purple glowing equalizer */
-.equalizer {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    height: 55px;
-    width: min(85%, 300px);
-    margin: -12px 0 25px;
-    opacity: 0.35;
-    transition: opacity 0.3s ease;
-}
-
-.equalizer span {
-    display: block;
-    width: 5px;
-    height: 8px;
-    border-radius: 5px;
-    background: #a020f0;
-    box-shadow:
-        0 0 6px #a020f0,
-        0 0 12px #8a2be2,
-        0 0 20px rgba(160, 32, 240, 0.7);
-}
-
-.equalizer.playing {
-    opacity: 1;
-}
-
-.equalizer.playing span {
-    animation: equalize 0.7s ease-in-out infinite alternate;
-}
-
-.equalizer.playing span:nth-child(2n) {
-    animation-duration: 0.45s;
-}
-
-.equalizer.playing span:nth-child(3n) {
-    animation-duration: 0.9s;
-}
-
-.equalizer.playing span:nth-child(4n) {
-    animation-duration: 0.55s;
-}
-
-@keyframes equalize {
-    0% {
-        height: 6px;
-        opacity: 0.65;
-    }
-
-    100% {
-        height: 45px;
-        opacity: 1;
-    }
-}
-
         body {
             margin: 0;
             min-height: 100vh;
@@ -94,6 +35,66 @@
             align-items: center;
         }
 
+        /* Purple glowing equalizer */
+        .equalizer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            height: 55px;
+            width: min(85%, 300px);
+            margin: -12px 0 25px;
+            opacity: 0.35;
+            transition: opacity 0.3s ease;
+        }
+
+        .equalizer span {
+            display: block;
+            width: 5px;
+            height: 8px;
+            flex-shrink: 0;
+            border-radius: 5px;
+            background: #a020f0;
+            box-shadow:
+                0 0 6px #a020f0,
+                0 0 12px #8a2be2,
+                0 0 20px rgba(160, 32, 240, 0.7);
+        }
+
+        .equalizer.playing {
+            opacity: 1;
+        }
+
+        .equalizer.playing span {
+            animation: equalize 0.7s ease-in-out infinite alternate;
+        }
+
+        .equalizer.playing span:nth-child(2n) {
+            animation-duration: 0.45s;
+        }
+
+        .equalizer.playing span:nth-child(3n) {
+            animation-duration: 0.9s;
+        }
+
+        .equalizer.playing span:nth-child(4n) {
+            animation-duration: 0.55s;
+        }
+
+        @keyframes equalize {
+            0% {
+                height: 6px;
+                opacity: 0.65;
+            }
+
+            100% {
+                height: 45px;
+                opacity: 1;
+            }
+        }
+
         /* Falling stars */
         #stars {
             position: fixed;
@@ -110,7 +111,9 @@
             height: 2px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 6px white, 0 0 12px #a020f0;
+            box-shadow:
+                0 0 6px white,
+                0 0 12px #a020f0;
             animation: fall linear infinite;
         }
 
@@ -119,9 +122,11 @@
                 transform: translateY(-10px);
                 opacity: 0;
             }
+
             10%, 90% {
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(110vh);
                 opacity: 0;
@@ -243,25 +248,6 @@
             background: #77737f;
         }
 
-        <!-- Purple Music Equalizer -->
-<div id="equalizer" class="equalizer" aria-label="Music visualizer">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-
         /* Download buttons */
         .buttons {
             position: relative;
@@ -318,6 +304,7 @@
                     0 0 15px #8a2be2,
                     0 0 30px #8a2be2;
             }
+
             to {
                 text-shadow:
                     0 0 10px #ffffff,
@@ -332,12 +319,14 @@
                 opacity: 0.65;
                 transform: scale(1);
             }
+
             to {
                 opacity: 1;
                 transform: scale(1.05);
             }
         }
 
+        /* Mobile layout */
         @media (max-width: 600px) {
             h1 {
                 font-size: 32px;
@@ -392,8 +381,32 @@
             <span></span>
             <span></span>
         </span>
+
         <span id="music-status">Music on</span>
     </button>
+
+    <!-- Purple Music Equalizer -->
+    <div
+        id="equalizer"
+        class="equalizer"
+        aria-label="Music visualizer"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
     <!-- Download buttons -->
     <div class="buttons">
@@ -433,12 +446,15 @@
             star.classList.add("star");
 
             star.style.left = Math.random() * 100 + "vw";
+
             star.style.animationDuration =
                 (3 + Math.random() * 5) + "s";
+
             star.style.animationDelay =
                 Math.random() * 5 + "s";
 
             const size = 1 + Math.random() * 3;
+
             star.style.width = size + "px";
             star.style.height = size + "px";
 
@@ -462,10 +478,12 @@
         music.src = randomSong;
         music.loop = true;
 
-
         /* Music toggle */
-        const musicToggle = document.getElementById("music-toggle");
-        const musicStatus = document.getElementById("music-status");
+        const musicToggle =
+            document.getElementById("music-toggle");
+
+        const musicStatus =
+            document.getElementById("music-status");
 
         musicToggle.addEventListener("click", () => {
             music.muted = !music.muted;
@@ -473,18 +491,37 @@
             if (music.muted) {
                 musicStatus.textContent = "Music off";
                 musicToggle.classList.add("muted");
-                musicToggle.setAttribute("aria-pressed", "true");
-                musicToggle.setAttribute("aria-label", "Unmute music");
+
+                musicToggle.setAttribute(
+                    "aria-pressed",
+                    "true"
+                );
+
+                musicToggle.setAttribute(
+                    "aria-label",
+                    "Unmute music"
+                );
             } else {
                 musicStatus.textContent = "Music on";
                 musicToggle.classList.remove("muted");
-                musicToggle.setAttribute("aria-pressed", "false");
-                musicToggle.setAttribute("aria-label", "Mute music");
+
+                musicToggle.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+                musicToggle.setAttribute(
+                    "aria-label",
+                    "Mute music"
+                );
             }
+
+            updateEqualizer();
         });
 
         /* Purple Equalizer */
-        const equalizer = document.getElementById("equalizer");
+        const equalizer =
+            document.getElementById("equalizer");
 
         function updateEqualizer() {
             const shouldAnimate =
@@ -504,11 +541,13 @@
         music.addEventListener("volumechange", updateEqualizer);
 
         /* Enter screen */
-        const enterScreen = document.getElementById("enter-screen");
+        const enterScreen =
+            document.getElementById("enter-screen");
 
         enterScreen.addEventListener("click", async () => {
             try {
                 await music.play();
+
                 updateEqualizer();
 
                 enterScreen.classList.add("hidden");
@@ -516,26 +555,12 @@
                 setTimeout(() => {
                     enterScreen.remove();
                 }, 700);
+
             } catch (error) {
-                console.error("Could not start music:", error);
-            }
-        });
-
-
-        /* Enter screen */
-        const enterScreen = document.getElementById("enter-screen");
-
-        enterScreen.addEventListener("click", async () => {
-            try {
-                await music.play();
-
-                enterScreen.classList.add("hidden");
-
-                setTimeout(() => {
-                    enterScreen.remove();
-                }, 700);
-            } catch (error) {
-                console.error("Could not start music:", error);
+                console.error(
+                    "Could not start music:",
+                    error
+                );
             }
         });
     </script>
